@@ -39,24 +39,17 @@ class SongListFragment : Fragment(), OnSongClickListener {
 
         override fun onResponse(call: Call<SongSearchResult>, response: Response<SongSearchResult>) {
             context?.showToast("Success")
-        }
-    }
-
-    private val SongListCallback = object : Callback<List<Song>> {
-        override fun onFailure(call: Call<List<Song>>, t: Throwable) {
-            context?.showToast("Can not call country list $t")
-        }
-
-        override fun onResponse(call: Call<List<Song>>, response: Response<List<Song>>) {
-            val songs = response.body() ?: return
+            val songs = response.body()? :return
             songAdapter.submitList(songs)
         }
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvSongs = view.findViewById(R.id.rv_rooms)
         songAdapter = SongAdapter(this)
+        rvSongs.apply {  }
         rvSongs.adapter = songAdapter
         rvSongs.layoutManager = LinearLayoutManager(context)
         rvSongs.itemAnimator = DefaultItemAnimator()
@@ -69,6 +62,10 @@ class SongListFragment : Fragment(), OnSongClickListener {
     private fun loadSongs() {
         ApiManager.artistService.songs().enqueue(songListCallback)
 
+    }
+
+    private  fun loadSongList(){
+        ApiManager.artistService.songs().enqueue(SongListCallback)
     }
 
     override fun onSongClick(song: Song) {
