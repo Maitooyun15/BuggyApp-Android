@@ -38,9 +38,11 @@ class SongListFragment : Fragment(), OnSongClickListener {
         }
 
         override fun onResponse(call: Call<SongSearchResult>, response: Response<SongSearchResult>) {
-            context?.showToast("Success")
-//            val songs = response.body()? :return
+
+//           val songs = response.body()? :return
 //            songAdapter.submitList(songs)
+            val song = response.body()!!.results
+            songAdapter.submitList(song)
         }
     }
 
