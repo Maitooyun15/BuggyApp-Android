@@ -15,10 +15,16 @@ class SongAdapter(private val listener: OnSongClickListener)
     /**
      * List songs of artris
      */
+
+//    val songs2: List<Song>
+//    get() = songs2
+
+
     val songs: List<Song>
         get() = _songs
 
     private var _songs: List<Song> = listOf()
+//    private var _songs2: List<Song> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SongItemViewHolder(parent)
 

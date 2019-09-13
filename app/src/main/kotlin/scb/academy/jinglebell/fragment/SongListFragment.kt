@@ -39,8 +39,8 @@ class SongListFragment : Fragment(), OnSongClickListener {
 
         override fun onResponse(call: Call<SongSearchResult>, response: Response<SongSearchResult>) {
             context?.showToast("Success")
-            val songs = response.body()? :return
-            songAdapter.submitList(songs)
+//            val songs = response.body()? :return
+//            songAdapter.submitList(songs)
         }
     }
 
@@ -65,7 +65,7 @@ class SongListFragment : Fragment(), OnSongClickListener {
     }
 
     private  fun loadSongList(){
-        ApiManager.artistService.songs().enqueue(SongListCallback)
+        ApiManager.artistService.songs().enqueue(songListCallback)
     }
 
     override fun onSongClick(song: Song) {
