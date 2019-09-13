@@ -13,6 +13,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import scb.academy.jinglebell.R
+import scb.academy.jinglebell.activity.SongInfoActivity
 import scb.academy.jinglebell.adapter.OnSongClickListener
 import scb.academy.jinglebell.adapter.SongAdapter
 import scb.academy.jinglebell.extension.showToast
@@ -51,11 +52,12 @@ class SongListFragment : Fragment(), OnSongClickListener {
         loadSongs()
     }
 
-    private fun loadSongs()  {
+    private fun loadSongs() {
         ApiManager.artistService.songs().enqueue(songListCallback)
     }
 
     override fun onSongClick(song: Song) {
+        SongInfoActivity.startActivity(this@SongListFragment.context, song)
 
     }
 }
