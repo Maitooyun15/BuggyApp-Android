@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import scb.academy.jinglebell.R
 import scb.academy.jinglebell.fragment.CountryListFragment
+import scb.academy.jinglebell.fragment.ProfileFragment
 import scb.academy.jinglebell.fragment.SongListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 SongListFragment()
             }
 
-            R.id.action_profile -> { Fragment() }
+            R.id.action_profile -> { ProfileFragment() }
 
             else -> return
         }
@@ -64,10 +65,5 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu to use in the action bar
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+
 }

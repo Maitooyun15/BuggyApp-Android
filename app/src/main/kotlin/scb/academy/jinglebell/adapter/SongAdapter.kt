@@ -9,22 +9,17 @@ import scb.academy.jinglebell.R
 import scb.academy.jinglebell.extension.setImageUrl
 import scb.academy.jinglebell.model.Song
 
-class SongAdapter(private val listener: OnSongClickListener)
-    : RecyclerView.Adapter<SongItemViewHolder>() {
+class SongAdapter(private val listener: OnSongClickListener) : RecyclerView.Adapter<SongItemViewHolder>() {
 
     /**
      * List songs of artris
      */
 
-//    val songs2: List<Song>
-//    get() = songs2
-
-
     val songs: List<Song>
         get() = _songs
 
     private var _songs: List<Song> = listOf()
-//    private var _songs2: List<Song> = listOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SongItemViewHolder(parent)
 
@@ -33,11 +28,9 @@ class SongAdapter(private val listener: OnSongClickListener)
     }
 
     override fun getItemCount(): Int {
-        return if (songs.count() == 0) {
-            0
-        } else {
-            songs.count() + 1
-        }
+
+        return songs.count()
+
     }
 
     fun submitList(list: List<Song>) {
@@ -48,7 +41,7 @@ class SongAdapter(private val listener: OnSongClickListener)
 }
 
 class SongItemViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
+    LayoutInflater.from(parent.context).inflate(R.layout.item_song, parent, false)
 ) {
 
     private val ivSongArtwork: ImageView = itemView.findViewById(R.id.iv_song_artwork)
