@@ -14,9 +14,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import scb.academy.jinglebell.R
 import scb.academy.jinglebell.activity.SongInfoActivity
+import scb.academy.jinglebell.adapter.CountryAdapter
 import scb.academy.jinglebell.adapter.OnSongClickListener
 import scb.academy.jinglebell.adapter.SongAdapter
 import scb.academy.jinglebell.extension.showToast
+import scb.academy.jinglebell.model.Country
 import scb.academy.jinglebell.model.Song
 import scb.academy.jinglebell.model.SongSearchResult
 import scb.academy.jinglebell.service.ApiManager
@@ -40,6 +42,17 @@ class SongListFragment : Fragment(), OnSongClickListener {
         }
     }
 
+    private val SongListCallback = object : Callback<List<Song>> {
+        override fun onFailure(call: Call<List<Song>>, t: Throwable) {
+            context?.showToast("Can not call country list $t")
+        }
+
+        override fun onResponse(call: Call<List<Song>>, response: Response<List<Song>>) {
+            val songs = response.body() ?: return
+            songAdapter.submitList(songs)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvSongs = view.findViewById(R.id.rv_rooms)
@@ -49,11 +62,13 @@ class SongListFragment : Fragment(), OnSongClickListener {
         rvSongs.itemAnimator = DefaultItemAnimator()
         rvSongs.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 
+
         loadSongs()
     }
 
     private fun loadSongs() {
         ApiManager.artistService.songs().enqueue(songListCallback)
+
     }
 
     override fun onSongClick(song: Song) {
